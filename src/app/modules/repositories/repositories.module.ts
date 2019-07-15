@@ -6,7 +6,9 @@ import {
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDividerModule,
+    MatListModule
 } from '@angular/material';
 
 import { RepositoriesRoutingModule } from './repositories-routing.module';
@@ -28,7 +30,9 @@ import { containers } from './containers';
         MatCardModule,
         MatIconModule,
         MatButtonModule,
-        MatChipsModule
+        MatChipsModule,
+        MatDividerModule,
+        MatListModule
     ]
 })
 export class RepositoriesModule { }

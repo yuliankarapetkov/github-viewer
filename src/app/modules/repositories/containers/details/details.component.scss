@@ -1,0 +1,18 @@
+.details {
+    background-color: #fff;
+    padding: 16px;
+
+    &__favorites {
+        display: flex;
+        align-items: center;
+
+        mat-icon {
+            margin-right: 6px;
+        }
+    }
+
+    &__language {
+        display: block;
+        margin: 16px 0;
+    }
+}
