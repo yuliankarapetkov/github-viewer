@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+
 import {
-    MatButtonModule,
+    MatCardModule,
     MatIconModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule
+    MatButtonModule,
+    MatChipsModule
 } from '@angular/material';
 
 import { RepositoriesRoutingModule } from './repositories-routing.module';
@@ -22,11 +22,10 @@ import { containers } from './containers';
 
         RepositoriesRoutingModule,
 
-        MatButtonModule,
+        MatCardModule,
         MatIconModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatListModule
+        MatButtonModule,
+        MatChipsModule
     ]
 })
 export class RepositoriesModule { }
