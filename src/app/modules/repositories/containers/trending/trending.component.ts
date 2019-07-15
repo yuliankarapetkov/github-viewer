@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Repository } from '../../models';
 
 @Component({
   selector: 'app-trending',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trending.component.scss']
 })
 export class TrendingComponent implements OnInit {
+    item: Repository = {
+        title: 'mozzila/sth',
+        description: 'mozzila descr',
+        starsCount: 123,
+        language: 'JavaScript'
+    }
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
-
+    ngOnInit(): void {
+    }
 }

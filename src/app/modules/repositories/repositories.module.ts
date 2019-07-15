@@ -10,10 +10,13 @@ import {
 } from '@angular/material';
 
 import { RepositoriesRoutingModule } from './repositories-routing.module';
+
+import { components } from './components';
 import { containers } from './containers';
 
 @NgModule({
     declarations: [
+        ...components,
         ...containers
     ],
     imports: [
