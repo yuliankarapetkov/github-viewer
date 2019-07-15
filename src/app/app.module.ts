@@ -28,7 +28,6 @@ import {
         MatSidenavModule,
         MatListModule
     ],
-    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

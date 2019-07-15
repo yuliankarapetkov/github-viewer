@@ -4,16 +4,16 @@
         <mat-list>
             <h3>Github Viewer</h3>
 
-            <mat-list-item>
+            <mat-list-item (click)="sidenav.close()">
                 <a mat-button routerLink="/repositories/trending">
                     <mat-icon mat-list-icon>trending_up</mat-icon>
                     Trending
                 </a>
             </mat-list-item>
-            <mat-list-item>
-                <a mat-button routerLink="/repositories/saved">
+            <mat-list-item (click)="sidenav.close()">
+                <a mat-button routerLink="/repositories/favorites">
                     <mat-icon mat-list-icon>favorite</mat-icon>
-                    Saved (3)
+                    Favorites (3)
                 </a>
             </mat-list-item>
         </mat-list>
