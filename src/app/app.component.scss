@@ -1,0 +1,16 @@
+mat-sidenav {
+    min-width: 320px;
+
+    h3 {
+        padding: 0 16px;
+    }
+
+   .mat-list-item {
+        width: 100%;
+
+        .mat-button {
+            width: 100%;
+            text-align: left;
+        }
+    }
+}
