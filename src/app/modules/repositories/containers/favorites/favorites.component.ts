@@ -1,15 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Repository } from '../../models';
+
 @Component({
-  selector: 'app-favorites',
-  templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.scss']
+    selector: 'app-favorites',
+    templateUrl: './favorites.component.html',
+    styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
+    item: Repository = {
+        title: 'mozzila/sth',
+        description: 'mozzila descr',
+        starsCount: 123,
+        language: 'JavaScript'
+    };
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit(): void {
+    }
 
+    removeRepository(repository: Repository): void {
+        console.log('remove', repository);
+    }
 }

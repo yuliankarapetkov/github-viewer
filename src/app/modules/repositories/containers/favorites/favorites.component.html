@@ -1,1 +1,6 @@
-<p>favorites works!</p>
+<div class="content">
+    <h2>Trending</h2>
+
+    <app-repository-item [item]="item" hasRemoveButton="true" (removed)="removeRepository($event)">
+    </app-repository-item>
+</div>
