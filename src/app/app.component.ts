@@ -17,6 +17,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._firestore.collection('test').add({ isSuccessful: true });
+        // this._firestore.collection('test').add({ isSuccessful: true });
     }
 }

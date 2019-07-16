@@ -11,7 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthRoutingModule } from './auth-routing.module';
 
 import { containers } from './containers';
-// import { reducer, effects } from './store';
+import { reducer, effects } from './store';
 
 @NgModule({
     declarations: [
@@ -23,8 +23,8 @@ import { containers } from './containers';
         MatCardModule,
         MatButtonModule,
 
-        // StoreModule.forFeature('auth', reducer),
-        // EffectsModule.forFeature(effects)
+        StoreModule.forFeature('auth', reducer),
+        EffectsModule.forFeature(effects),
 
         AuthRoutingModule,
     ]
