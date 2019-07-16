@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { RequireAuthGuard } from './modules/auth/guards';
+
 const routes: Routes = [
     {
         path: '',
@@ -9,6 +11,7 @@ const routes: Routes = [
     },
     {
         path: 'repositories',
+        canActivate: [RequireAuthGuard],
         loadChildren: './modules/repositories/repositories.module#RepositoriesModule'
     }
 ];

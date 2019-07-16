@@ -7,12 +7,14 @@ export interface AuthState {
     user: User;
     isAuthenticated: boolean;
     signInLoading: boolean;
+    signOutLoading: boolean;
 }
 
 export const initialState: AuthState = {
     user: null,
-    isAuthenticated: false,
-    signInLoading: false
+    isAuthenticated: undefined,
+    signInLoading: false,
+    signOutLoading: false
 };
 
 export function reducer(state = initialState, action: fromActions.AuthAction): AuthState {
@@ -38,6 +40,21 @@ export function reducer(state = initialState, action: fromActions.AuthAction): A
             return {
                 ...state,
                 signInLoading: false
+            };
+        }
+
+        case AuthActionTypes.SignOut: {
+            return {
+                ...state,
+                signOutLoading: true
+            };
+        }
+
+        case AuthActionTypes.SignOutSuccess:
+        case AuthActionTypes.SignOutFailure: {
+            return {
+                ...state,
+                signOutLoading: false
             };
         }
     }

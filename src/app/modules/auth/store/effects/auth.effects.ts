@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of } from 'rxjs';
-import { switchMap, map, catchError} from 'rxjs/operators';
+import { switchMap, map, catchError, mapTo} from 'rxjs/operators';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
@@ -39,6 +39,20 @@ export class AuthEffects {
         );
 
     @Effect()
+    getUserSuccess$ = this._actions$
+        .pipe(
+            ofType(AuthActionTypes.GetUserSuccess),
+            map((user: User | null) => new fromRootActions.Go({ path: ['/', !!user ? 'repositories' : 'login'] }))
+        );
+
+    @Effect()
+    getUserFailure$ = this._actions$
+        .pipe(
+            ofType(AuthActionTypes.GetUserFailure),
+            mapTo(new fromRootActions.Go({ path: ['/', 'login'] }))
+        );
+
+    @Effect()
     signInWithGoogle$ = this._actions$
         .pipe(
             ofType(AuthActionTypes.SignInWithGoogle),
@@ -56,11 +70,27 @@ export class AuthEffects {
     signInSuccess$ =  this._actions$
         .pipe(
             ofType(AuthActionTypes.SignInWithGoogleSuccess),
+            mapTo(new fromActions.GetUser())
+        );
+
+    @Effect()
+    signOut$ = this._actions$
+        .pipe(
+            ofType(AuthActionTypes.SignOut),
             switchMap(() => {
-                return [
-                    new fromActions.GetUser(),
-                    new fromRootActions.Go({ path: ['/', 'repositories'] })
-                ];
+                return this._authDataService
+                    .signOut()
+                    .pipe(
+                        map(() => new fromActions.SignOutSuccess()),
+                        catchError(() => of(new fromActions.SignOutFailure()))
+                    );
             })
+        );
+
+    @Effect()
+    signOutSuccess$ =  this._actions$
+        .pipe(
+            ofType(AuthActionTypes.SignOutSuccess),
+            mapTo(new fromActions.GetUser())
         );
 }

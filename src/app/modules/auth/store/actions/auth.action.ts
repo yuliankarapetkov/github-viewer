@@ -10,6 +10,10 @@ export enum AuthActionTypes {
     SignInWithGoogle = '[Auth] Sign In With Google',
     SignInWithGoogleSuccess = '[Auth] Sign In With Google Success',
     SignInWithGoogleFailure = '[Auth] Sign In With Google Failure',
+
+    SignOut = '[Auth] Sign Out',
+    SignOutSuccess = '[Auth] Sign Out Success',
+    SignOutFailure = '[Auth] Sign Out Failure',
 }
 
 export class GetUser implements Action {
@@ -37,10 +41,25 @@ export class SignInWithGoogleFailure implements Action {
     readonly type = AuthActionTypes.SignInWithGoogleFailure;
 }
 
+export class SignOut implements Action {
+    readonly type = AuthActionTypes.SignOut;
+}
+
+export class SignOutSuccess implements Action {
+    readonly type = AuthActionTypes.SignOutSuccess;
+}
+
+export class SignOutFailure implements Action {
+    readonly type = AuthActionTypes.SignOutFailure;
+}
+
 export type AuthAction =
     | GetUser
     | GetUserSuccess
     | GetUserFailure
     | SignInWithGoogle
     | SignInWithGoogleSuccess
-    | SignInWithGoogleFailure;
+    | SignInWithGoogleFailure
+    | SignOut
+    | SignOutSuccess
+    | SignOutFailure;

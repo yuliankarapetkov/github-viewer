@@ -16,6 +16,12 @@
                     Favorites (3)
                 </a>
             </mat-list-item>
+            <mat-list-item (click)="sidenav.close()">
+                <button mat-button (click)="signOut()">
+                    <mat-icon mat-list-icon>exit_to_app</mat-icon>
+                    Sign out
+                </button>
+            </mat-list-item>
         </mat-list>
     </mat-sidenav>
 

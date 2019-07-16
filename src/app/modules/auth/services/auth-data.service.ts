@@ -21,4 +21,8 @@ export class AuthDataService {
         const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
         return from(this._fireAuth.auth.signInWithPopup(googleAuthProvider));
     }
+
+    signOut(): Observable<void> {
+        return from(this._fireAuth.auth.signOut());
+    }
 }

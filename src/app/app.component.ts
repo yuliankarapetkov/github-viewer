@@ -29,4 +29,8 @@ export class AppComponent implements OnInit {
     goBack(): void {
         this._routerService.back();
     }
+
+    signOut(): void {
+        this._authService.signOut();
+    }
 }
