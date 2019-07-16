@@ -9,6 +9,7 @@ import { Repository } from '../../models';
 })
 export class FavoritesComponent implements OnInit {
     item: Repository = {
+        id: '123',
         title: 'mozzila/sth',
         description: 'mozzila descr',
         starsCount: 123,

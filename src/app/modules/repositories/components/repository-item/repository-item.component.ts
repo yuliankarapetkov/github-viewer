@@ -12,6 +12,7 @@ export class RepositoryItemComponent implements OnInit {
     @Input() hasRemoveButton = false;
 
     @Output() removed = new EventEmitter<Repository>();
+    @Output() detailsClicked = new EventEmitter<Repository>();
 
     constructor() { }
 
@@ -20,5 +21,9 @@ export class RepositoryItemComponent implements OnInit {
 
     remove(): void {
         this.removed.emit(this.item);
+    }
+
+    seeDetails(): void {
+        this.detailsClicked.emit(this.item);
     }
 }

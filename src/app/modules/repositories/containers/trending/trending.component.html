@@ -1,6 +1,6 @@
 <div class="content">
     <h2>Trending</h2>
 
-    <app-repository-item [item]="item">
+    <app-repository-item [item]="item" (detailsClicked)="seeDetails($event)">
     </app-repository-item>
 </div>
