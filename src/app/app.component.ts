@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+import { ToolbarService } from './services/toolbar.service';
+import { ToolbarConfig } from './models/toolbar.config';
 
 @Component({
     selector: 'app-root',
@@ -8,15 +12,19 @@ import { AngularFirestore } from '@angular/fire/firestore';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    title = 'github-viewer';
+    toolbarConfig$: Observable<ToolbarConfig>;
 
     constructor(
-        private _firestore: AngularFirestore
+        private _location: Location,
+        private _toolbarService: ToolbarService
     ) {
-
+        this.toolbarConfig$ = this._toolbarService.getConfig$();
     }
 
     ngOnInit(): void {
-        // this._firestore.collection('test').add({ isSuccessful: true });
+    }
+
+    goBack(): void {
+        this._location.back();
     }
 }

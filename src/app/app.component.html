@@ -21,10 +21,14 @@
 
     <mat-sidenav-content>
         <mat-toolbar color="primary">
+            <button *ngIf="(toolbarConfig$ | async)?.showBackButton" mat-button (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
 
-            <button mat-button (click)="sidenav.toggle()">
+            <button *ngIf="(toolbarConfig$ | async)?.showMenuButton" mat-button (click)="sidenav.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
+
             <div>
                 Github Viewer
             </div>
