@@ -15,7 +15,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { AuthModule } from './modules/auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -28,7 +30,6 @@ import { environment } from 'src/environments/environment';
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule,
         BrowserAnimationsModule,
 
         // Material
@@ -52,6 +53,11 @@ import { environment } from 'src/environments/environment';
         // Firebase
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
+        AngularFireAuthModule,
+
+        // Project
+        AppRoutingModule,
+        AuthModule
     ],
     bootstrap: [AppComponent]
 })

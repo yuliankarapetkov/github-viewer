@@ -1,0 +1,14 @@
+mat-card-title,
+mat-card-content {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    mat-card-content {
+        .login-button {
+            display: block;
+            margin: 30px 0 20px;
+        }
+    }
+}
