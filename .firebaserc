@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "githubviewer-mvp": {
+      "hosting": {
+        "github-viewer": [
+          "githubviewer-mvp"
+        ]
+      }
+    }
+  }
+}

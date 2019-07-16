@@ -119,6 +119,10 @@
               "devServerTarget": "github-viewer:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
