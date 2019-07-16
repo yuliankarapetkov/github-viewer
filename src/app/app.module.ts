@@ -11,6 +11,7 @@ import {
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AngularFireModule } from '@angular/fire';
@@ -21,8 +22,9 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { reducers, metaReducers } from './store/reducers';
 import { environment } from 'src/environments/environment';
+import { reducers, metaReducers, CustomSerializer } from './store/reducers';
+import { effects } from './store/effects';
 
 @NgModule({
     declarations: [
@@ -47,7 +49,8 @@ import { environment } from 'src/environments/environment';
                 strictActionImmutability: true
             }
         }),
-        EffectsModule.forRoot([]),
+        EffectsModule.forRoot(effects),
+        StoreRouterConnectingModule.forRoot(),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
 
         // Firebase
@@ -58,6 +61,12 @@ import { environment } from 'src/environments/environment';
         // Project
         AppRoutingModule,
         AuthModule
+    ],
+    providers: [
+        {
+            provide: RouterStateSerializer,
+            useClass: CustomSerializer
+        }
     ],
     bootstrap: [AppComponent]
 })
