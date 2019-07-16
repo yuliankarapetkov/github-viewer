@@ -7,6 +7,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as firebase from 'firebase/app';
 
+import * as fromRootActions from '../../../../store/actions';
 import * as fromActions from '../actions';
 import { AuthActionTypes } from '../actions';
 import { AuthDataService } from './../../services';
@@ -57,7 +58,8 @@ export class AuthEffects {
             ofType(AuthActionTypes.SignInWithGoogleSuccess),
             switchMap(() => {
                 return [
-                    new fromActions.GetUser()
+                    new fromActions.GetUser(),
+                    new fromRootActions.Go({ path: ['/', 'repositories'] })
                 ];
             })
         );

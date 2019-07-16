@@ -13,6 +13,10 @@ export class AuthService {
         private _store: Store<fromReducers.AuthState>
     ) {}
 
+    requestUser(): void {
+        this._store.dispatch(new fromActions.GetUser());
+    }
+
     signInWithGoogle(): void {
         this._store.dispatch(new fromActions.SignInWithGoogle());
     }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 
 import { Observable } from 'rxjs';
 
-import { ToolbarService } from './services/toolbar.service';
-import { ToolbarConfig } from './models/toolbar.config';
+import { RouterService, ToolbarService } from './services';
+import { ToolbarConfig } from './models';
+import { AuthService } from './modules/auth/services';
 
 @Component({
     selector: 'app-root',
@@ -15,16 +15,18 @@ export class AppComponent implements OnInit {
     toolbarConfig$: Observable<ToolbarConfig>;
 
     constructor(
-        private _location: Location,
-        private _toolbarService: ToolbarService
+        private _toolbarService: ToolbarService,
+        private _authService: AuthService,
+        private _routerService: RouterService
     ) {
         this.toolbarConfig$ = this._toolbarService.getConfig$();
     }
 
     ngOnInit(): void {
+        this._authService.requestUser();
     }
 
     goBack(): void {
-        this._location.back();
+        this._routerService.back();
     }
 }
