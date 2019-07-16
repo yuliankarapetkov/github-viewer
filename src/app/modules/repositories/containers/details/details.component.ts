@@ -18,7 +18,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-
     }
 
     ngOnDestroy(): void {

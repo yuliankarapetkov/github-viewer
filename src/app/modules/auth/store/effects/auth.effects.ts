@@ -5,10 +5,12 @@ import { switchMap, map, catchError} from 'rxjs/operators';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { AuthDataService } from './../../services';
+import * as firebase from 'firebase/app';
 
 import * as fromActions from '../actions';
 import { AuthActionTypes } from '../actions';
+import { AuthDataService } from './../../services';
+import { User } from '../../models';
 
 @Injectable()
 export class AuthEffects {
@@ -16,6 +18,24 @@ export class AuthEffects {
         private _actions$: Actions,
         private _authDataService: AuthDataService
     ) {}
+
+    @Effect()
+    getUser$ = this._actions$
+        .pipe(
+            ofType(AuthActionTypes.GetUser),
+            switchMap(() => {
+                return this._authDataService
+                    .getUser()
+                    .pipe(
+                        map((firebaseUser: firebase.User | null) => {
+                            const { uid, email } = firebaseUser;
+                            const user: User = firebaseUser ? { uid, email } : null;
+                            return new fromActions.GetUserSuccess(user);
+                        }),
+                        catchError(() => of(new fromActions.GetUserFailure()))
+                    );
+            })
+        );
 
     @Effect()
     signInWithGoogle$ = this._actions$
@@ -26,9 +46,19 @@ export class AuthEffects {
                     .signInWithGoogle()
                     .pipe(
                         map(() => new fromActions.SignInWithGoogleSuccess()),
-                        catchError(error => of(new fromActions.SignInWithGoogleFailure()))
+                        catchError(() => of(new fromActions.SignInWithGoogleFailure()))
                     );
             })
         );
 
+    @Effect()
+    signInSuccess$ =  this._actions$
+        .pipe(
+            ofType(AuthActionTypes.SignInWithGoogleSuccess),
+            switchMap(() => {
+                return [
+                    new fromActions.GetUser()
+                ];
+            })
+        );
 }

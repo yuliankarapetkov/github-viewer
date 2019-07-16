@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { ToolbarService } from './../../../../services/toolbar.service';
+import { ToolbarService } from './../../../../services';
+import { AuthService } from './../../services';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,8 @@ import { ToolbarService } from './../../../../services/toolbar.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
     constructor(
-        private _toolbarService: ToolbarService
+        private _toolbarService: ToolbarService,
+        private _authService: AuthService
     ) {
         this._toolbarService.setConfig({
             showBackButton: false,
@@ -26,5 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             showBackButton: false,
             showMenuButton: true
         });
+    }
+
+    signInWithGoogle(): void {
+        this._authService.signInWithGoogle();
     }
 }

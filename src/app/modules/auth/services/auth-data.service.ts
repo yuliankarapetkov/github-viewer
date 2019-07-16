@@ -13,6 +13,10 @@ export class AuthDataService {
         private _fireAuth: AngularFireAuth
     ) {}
 
+    getUser(): Observable<firebase.User | null> {
+        return this._fireAuth.authState;
+    }
+
     signInWithGoogle(): Observable<firebase.auth.UserCredential> {
         const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
         return from(this._fireAuth.auth.signInWithPopup(googleAuthProvider));
