@@ -39,13 +39,6 @@ export class AuthEffects {
         );
 
     @Effect()
-    getUserSuccess$ = this._actions$
-        .pipe(
-            ofType(AuthActionTypes.GetUserSuccess),
-            map((user: User | null) => new fromRootActions.Go({ path: ['/', !!user ? 'repositories' : 'login'] }))
-        );
-
-    @Effect()
     getUserFailure$ = this._actions$
         .pipe(
             ofType(AuthActionTypes.GetUserFailure),
@@ -70,7 +63,12 @@ export class AuthEffects {
     signInSuccess$ =  this._actions$
         .pipe(
             ofType(AuthActionTypes.SignInWithGoogleSuccess),
-            mapTo(new fromActions.GetUser())
+            switchMap(() => {
+                return [
+                    new fromActions.GetUser(),
+                    new fromRootActions.Go({ path: ['/', 'repositories'] })
+                ];
+            })
         );
 
     @Effect()
