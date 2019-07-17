@@ -5,6 +5,6 @@
         *ngFor="let repository of repositories$ | async"
         [item]="repository"
         hasRemoveButton="true"
-        (removed)="removeRepository($event)">
+        (removed)="unfavoriteRepository($event)">
     </app-repository-item>
 </div>

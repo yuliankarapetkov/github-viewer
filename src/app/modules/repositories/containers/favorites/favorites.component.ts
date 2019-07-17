@@ -21,7 +21,7 @@ export class FavoritesComponent implements OnInit {
         this.repositories$ = this._repositoriesService.getFavoriteRepositories$();
     }
 
-    removeRepository(repository: Repository): void {
-        console.log('remove', repository);
+    unfavoriteRepository(repository: Repository): void {
+        this._repositoriesService.unfavoriteRepository(repository);
     }
 }
