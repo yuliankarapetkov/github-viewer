@@ -40,4 +40,8 @@ export class RepositoriesService {
     getSelectedRepository$(): Observable<Repository> {
         return this._store.pipe(select(fromSelectors.getSelectedRepository));
     }
+
+    getRepositoriesLoaded$(): Observable<boolean> {
+        return this._store.pipe(select(fromSelectors.getRepositoriesLoaded));
+    }
 }

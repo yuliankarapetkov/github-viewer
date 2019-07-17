@@ -18,7 +18,6 @@ export class TrendingComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this._repositoriesService.requestRepositories();
         this.repositories$ = this._repositoriesService.getRepositories$();
     }
 }

@@ -3,6 +3,7 @@ import { RepositoriesActionTypes } from '../actions';
 
 export interface RepositoriesState {
     list: any[];
+    loaded: boolean;
     getRepositoriesLoading: boolean;
     favoriteRepositoryLoading: boolean;
     unfavoriteRepositoryLoading: boolean;
@@ -10,6 +11,7 @@ export interface RepositoriesState {
 
 export const initialState: RepositoriesState = {
     list: [],
+    loaded: false,
     getRepositoriesLoading: false,
     favoriteRepositoryLoading: false,
     unfavoriteRepositoryLoading: false
@@ -29,6 +31,7 @@ export function reducer(state = initialState, action: fromActions.RepositoriesAc
             return {
                 ...state,
                 list,
+                loaded: true,
                 getRepositoriesLoading: false
             };
         }
