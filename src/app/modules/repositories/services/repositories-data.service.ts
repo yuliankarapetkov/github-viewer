@@ -23,7 +23,7 @@ export class RepositoriesDataService {
 
     getRepositories(): Observable<any[]> {
         return this._firestore
-            .collection('repositories', ref => ref.limit(3))
+            .collection('repositories', ref => ref.limit(25))
             .valueChanges();
     }
 
