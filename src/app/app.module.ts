@@ -8,7 +8,8 @@ import {
     MatSidenavModule,
     MatListModule,
     MAT_SNACK_BAR_DEFAULT_OPTIONS,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
 } from '@angular/material';
 
 import { StoreModule } from '@ngrx/store';
@@ -43,6 +44,7 @@ import { effects } from './store/effects';
         MatSidenavModule,
         MatListModule,
         MatSnackBarModule,
+        MatProgressSpinnerModule,
 
         // Ngrx
         StoreModule.forRoot(reducers, {

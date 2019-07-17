@@ -41,7 +41,13 @@
 
         </mat-toolbar>
 
-        <router-outlet></router-outlet>
+        <div [hidden]="!routeLoading">
+            <mat-spinner>
+            </mat-spinner>
+        </div>
+        <div [hidden]="routeLoading">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 
 </mat-sidenav-container>
