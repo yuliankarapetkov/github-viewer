@@ -6,7 +6,6 @@ import { takeUntil } from 'rxjs/operators';
 import { ToolbarService } from './../../../../services/toolbar.service';
 import { Repository } from '../../models';
 import { RepositoriesService } from './../../services';
-import { RepositoriesDataService } from '../../services';
 
 @Component({
     selector: 'app-details',
@@ -20,7 +19,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     constructor(
         private _toolbarService: ToolbarService,
-        private _repositoryDataService: RepositoriesDataService,
         private _repositoriesService: RepositoriesService
     ) {
         this._toolbarService.setConfig({
@@ -44,7 +42,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
         });
     }
 
-    saveRepository(): void {
-        this._repositoryDataService.saveRepository(this.repository);
+    favoriteRepository(): void {
+        this._repositoriesService.favoriteRepository(this.repository);
+    }
+
+    unfavoriteRepository(): void {
+        this._repositoriesService.unfavoriteRepository(this.repository);
     }
 }

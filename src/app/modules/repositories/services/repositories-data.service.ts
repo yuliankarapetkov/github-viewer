@@ -27,47 +27,37 @@ export class RepositoriesDataService {
             .valueChanges();
     }
 
-    saveRepository(repository: Repository): Observable<void> {
-        const save = async (): Promise<void> => {
+    favoriteRepository(repository: Repository): Observable<void> {
+        const favorite = async (): Promise<void> => {
             const userRef = this._firestore
                 .collection('users')
                 .doc(this._uid)
                 .ref;
 
-            const user = (await userRef.get()).data();
+            const { favorites } = (await userRef.get()).data();
 
-            if (user) {
-                const { favorites } = user;
-
-                if (!favorites.some(id => id === repository.id)) {
-                    await userRef.update({ favorites: [ ...favorites, repository.id ] });
-                }
-            } else {
-                await userRef.set({ id: this._uid, favorites: [ repository.id ] });
+            if (!favorites.some((id: string) => id === repository.id)) {
+                await userRef.update({ favorites: [ ...favorites, repository.id ] });
             }
         };
 
-        return from(save());
+        return from(favorite());
     }
 
-    removeRepository(repository: Repository): Observable<void> {
-        const remove = async (): Promise<void> => {
+    unfavoriteRepository(repository: Repository): Observable<void> {
+        const unfavorite = async (): Promise<void> => {
             const userRef = this._firestore
                 .collection('users')
                 .doc(this._uid)
                 .ref;
 
-            const user = (await userRef.get()).data();
+            const { favorites } = (await userRef.get()).data();
 
-            if (user) {
-                const { favorites } = user;
-
-                if (favorites.some(id => id === repository.id)) {
-                    await userRef.update({ favorites: favorites.filter(id => id !== repository.id) });
-                }
+            if (favorites.some((id: string) => id === repository.id)) {
+                await userRef.update({ favorites: favorites.filter((id: string) => id !== repository.id) });
             }
         };
 
-        return from(remove());
+        return from(unfavorite());
     }
 }

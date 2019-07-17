@@ -18,11 +18,21 @@
             </mat-chip-list>
 
             <button
-                (click)="saveRepository()"
+                *ngIf="!repository.isFavorite"
+                (click)="favoriteRepository()"
                 class="details__save-button"
                 mat-raised-button
                 color="primary">
                 Save to Favorites
+            </button>
+
+            <button
+                *ngIf="repository.isFavorite"
+                (click)="unfavoriteRepository()"
+                class="details__save-button"
+                mat-raised-button
+                color="primary">
+                Remove from Favorites
             </button>
         </div>
 

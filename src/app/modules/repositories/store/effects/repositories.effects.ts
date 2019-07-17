@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of } from 'rxjs';
-import { switchMap, map, catchError, take} from 'rxjs/operators';
+import { switchMap, map, catchError, take, mapTo} from 'rxjs/operators';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
@@ -33,4 +33,35 @@ export class RepositoriesEffects {
             })
         );
 
+    @Effect()
+    favoriteRepository$ = this._actions$
+        .pipe(
+            ofType(RepositoriesActionTypes.FavoriteRepository),
+            map((action: fromActions.FavoriteRepository) => action.payload),
+            switchMap((repository: Repository) => {
+                return this._repositoriesDataService
+                    .favoriteRepository(repository)
+                    .pipe(
+                        take(1),
+                        mapTo(new fromActions.FavoriteRepositorySuccess()),
+                        catchError(() => of(new fromActions.FavoriteRepositoryFailure()))
+                    );
+            })
+        );
+
+    @Effect()
+    unfavoriteRepositoiry$ = this._actions$
+        .pipe(
+            ofType(RepositoriesActionTypes.UnfavoriteRepository),
+            map((action: fromActions.UnfavoriteRepository) => action.payload),
+            switchMap((repository: Repository) => {
+                return this._repositoriesDataService
+                    .unfavoriteRepository(repository)
+                    .pipe(
+                        take(1),
+                        mapTo(new fromActions.UnfavoriteRepositorySuccess()),
+                        catchError(() => of(new fromActions.UnfavoriteRepositoryFailure()))
+                    );
+            })
+        );
 }

@@ -4,11 +4,15 @@ import { RepositoriesActionTypes } from '../actions';
 export interface RepositoriesState {
     list: any[];
     getRepositoriesLoading: boolean;
+    favoriteRepositoryLoading: boolean;
+    unfavoriteRepositoryLoading: boolean;
 }
 
 export const initialState: RepositoriesState = {
     list: [],
-    getRepositoriesLoading: false
+    getRepositoriesLoading: false,
+    favoriteRepositoryLoading: false,
+    unfavoriteRepositoryLoading: false
 };
 
 export function reducer(state = initialState, action: fromActions.RepositoriesAction): RepositoriesState {
@@ -33,6 +37,36 @@ export function reducer(state = initialState, action: fromActions.RepositoriesAc
             return {
                 ...state,
                 getRepositoriesLoading: false
+            };
+        }
+
+        case RepositoriesActionTypes.FavoriteRepository: {
+            return {
+                ...state,
+                favoriteRepositoryLoading: true
+            };
+        }
+
+        case RepositoriesActionTypes.FavoriteRepositorySuccess:
+        case RepositoriesActionTypes.FavoriteRepositoryFailure: {
+            return {
+                ...state,
+                favoriteRepositoryLoading: false
+            };
+        }
+
+        case RepositoriesActionTypes.UnfavoriteRepository: {
+            return {
+                ...state,
+                unfavoriteRepositoryLoading: true
+            };
+        }
+
+        case RepositoriesActionTypes.UnfavoriteRepositorySuccess:
+        case RepositoriesActionTypes.UnfavoriteRepositoryFailure: {
+            return {
+                ...state,
+                unfavoriteRepositoryLoading: false
             };
         }
     }

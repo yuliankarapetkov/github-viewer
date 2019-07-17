@@ -21,6 +21,14 @@ export class RepositoriesService {
         this._store.dispatch(new fromActions.GetRepositories());
     }
 
+    favoriteRepository(repository: Repository): void {
+        this._store.dispatch(new fromActions.FavoriteRepository(repository));
+    }
+
+    unfavoriteRepository(repository: Repository): void {
+        this._store.dispatch(new fromActions.UnfavoriteRepository(repository));
+    }
+
     getRepositories$(): Observable<Repository[]> {
         return this._store.pipe(select(fromSelectors.getRepositories));
     }

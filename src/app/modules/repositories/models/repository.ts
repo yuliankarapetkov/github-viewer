@@ -6,4 +6,5 @@ export interface Repository {
     language: string;
     languageColor: string;
     builtBy: { username: string, followers: number; avatar: string; }[];
+    isFavorite?: boolean;
 }
