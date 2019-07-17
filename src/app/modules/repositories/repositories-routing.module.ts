@@ -18,7 +18,7 @@ const routes: Routes = [
         component: FavoritesComponent
     },
     {
-        path: ':id',
+        path: ':repositoryId',
         component: DetailsComponent
     }
 ];

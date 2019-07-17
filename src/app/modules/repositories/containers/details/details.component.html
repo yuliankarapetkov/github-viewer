@@ -1,6 +1,6 @@
 <div class="content">
     <mat-card class="details">
-        <h2>{{ repository.title }}</h2>
+        <h2>{{ repository.name }}</h2>
         <p>
             {{ repository.description }}
         </p>
@@ -8,11 +8,11 @@
         <div>
             <div class="details__favorites">
                 <mat-icon>favorite</mat-icon>
-                {{ repository.starsCount }}
+                {{ repository.stars }}
             </div>
 
             <mat-chip-list class="details__language">
-                <mat-chip color="accent" selected selectable="false">
+                <mat-chip [style.backgroundColor]="repository.languageColor" selected selectable="false">
                     {{ repository.language }}
                 </mat-chip>
             </mat-chip-list>
@@ -31,11 +31,11 @@
 
         <h3>Built by</h3>
         <mat-list>
-            <mat-list-item>
-                <img matListAvatar src="http://social.microsoft.com/profile/u/avatar.jpg?displayname=florian+auer&size=extralarge&version=bd0896cb-3be0-4ab5-a234-042113506f55" alt="...">
-                <h3 matLine> fasfasfas </h3>
+            <mat-list-item *ngFor="let user of repository?.builtBy">
+                <img matListAvatar [src]="user.avatar" [alt]="user.username">
+                <h3 matLine>{{ user.username }}</h3>
                 <p matLine>
-                    50 followers
+                    {{ user.followers }} followers
                 </p>
             </mat-list-item>
         </mat-list>

@@ -1,7 +1,10 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromAuth from './../../../auth/store/selectors';
+import { Params } from '@angular/router';
 
-import { RepositoriesState } from '../reducers/repositories.reducer';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+
+import * as fromRoot from './../../../../store/selectors';
+import * as fromAuth from './../../../auth/store/selectors';
+import { RepositoriesState } from '../reducers';
 import { Repository } from '../../models';
 
 export const getRepositoriesState = createFeatureSelector<RepositoriesState>('repositories');
@@ -15,4 +18,12 @@ export const getFavoriteRepositories = createSelector(
     fromAuth.getUserFavorites,
     (repositories: Repository[], favorites: string[]) => {
         return repositories && repositories.filter(repo => favorites.some(f => f === repo.id));
+    });
+
+export const getSelectedRepository = createSelector(
+    getRepositories,
+    fromRoot.getParams,
+    (repositories: Repository[], params: Params) => {
+        console.log(repositories, params)
+        return repositories && repositories.find(repo => repo.id === params.repositoryId);
     });
