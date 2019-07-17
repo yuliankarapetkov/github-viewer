@@ -46,7 +46,7 @@ export class RepositoriesEffects {
                     .pipe(
                         take(1),
                         mapTo(new fromActions.FavoriteRepositorySuccess(repository)),
-                        catchError(() => of(new fromActions.FavoriteRepositoryFailure()))
+                        catchError(() => of(new fromActions.FavoriteRepositoryFailure(repository)))
                     );
             })
         );
@@ -57,6 +57,15 @@ export class RepositoriesEffects {
             ofType(RepositoriesActionTypes.FavoriteRepositorySuccess),
             map((action: fromActions.FavoriteRepositorySuccess) => action.payload),
             tap((repository: Repository) => this._snackBar.open(`You have added ${repository.name} to favorites.`, 'Yay'))
+        );
+
+    @Effect({ dispatch: false })
+    favoriteRepositoryFailure$ = this._actions$
+        .pipe(
+            ofType(RepositoriesActionTypes.FavoriteRepositoryFailure),
+            map((action: fromActions.FavoriteRepositoryFailure) => action.payload),
+            tap((repository: Repository) => this._snackBar.open(
+                `Uh oh! Something wrong happened and we could not add ${repository.name} to favorites.`, 'No worries'))
         );
 
     @Effect()
@@ -70,7 +79,7 @@ export class RepositoriesEffects {
                     .pipe(
                         take(1),
                         mapTo(new fromActions.UnfavoriteRepositorySuccess(repository)),
-                        catchError(() => of(new fromActions.UnfavoriteRepositoryFailure()))
+                        catchError(() => of(new fromActions.UnfavoriteRepositoryFailure(repository)))
                     );
             })
         );
@@ -81,5 +90,14 @@ export class RepositoriesEffects {
             ofType(RepositoriesActionTypes.UnfavoriteRepositorySuccess),
             map((action: fromActions.UnfavoriteRepositorySuccess) => action.payload),
             tap((repository: Repository) => this._snackBar.open(`You have removed ${repository.name} from favorites.`, 'Thanks'))
+        );
+
+    @Effect({ dispatch: false })
+    unfavoriteRepositoryFailure$ = this._actions$
+        .pipe(
+            ofType(RepositoriesActionTypes.UnfavoriteRepositoryFailure),
+            map((action: fromActions.UnfavoriteRepositoryFailure) => action.payload),
+            tap((repository: Repository) => this._snackBar.open(
+                `Uh oh! Something wrong happened and we could not remove ${repository.name} from favorites.`, 'No worries'))
         );
 }

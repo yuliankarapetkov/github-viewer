@@ -41,6 +41,7 @@ export class FavoriteRepositorySuccess implements Action {
 
 export class FavoriteRepositoryFailure implements Action {
     readonly type = RepositoriesActionTypes.FavoriteRepositoryFailure;
+    constructor(public payload: Repository) {}
 }
 
 export class UnfavoriteRepository implements Action {
@@ -55,6 +56,7 @@ export class UnfavoriteRepositorySuccess implements Action {
 
 export class UnfavoriteRepositoryFailure implements Action {
     readonly type = RepositoriesActionTypes.UnfavoriteRepositoryFailure;
+    constructor(public payload: Repository) {}
 }
 
 export type RepositoriesAction =
