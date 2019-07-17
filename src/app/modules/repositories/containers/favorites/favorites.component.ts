@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
 import { Repository } from '../../models';
+import { RepositoriesService } from '../../services';
 
 @Component({
     selector: 'app-favorites',
@@ -8,11 +11,14 @@ import { Repository } from '../../models';
     styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
-    item: Repository = null;
+    repositories$: Observable<Repository[]>;
 
-    constructor() { }
+    constructor(
+        private _repositoriesService: RepositoriesService
+    ) { }
 
     ngOnInit(): void {
+        this.repositories$ = this._repositoriesService.getFavoriteRepositories$();
     }
 
     removeRepository(repository: Repository): void {

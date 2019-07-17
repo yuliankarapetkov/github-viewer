@@ -1,4 +1,4 @@
 export interface User {
-    uid: string;
-    email: string;
+    id: string;
+    favorites: string[];
 }

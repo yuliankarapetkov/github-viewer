@@ -24,4 +24,8 @@ export class RepositoriesService {
     getRepositories$(): Observable<Repository[]> {
         return this._store.pipe(select(fromSelectors.getRepositories));
     }
+
+    getFavoriteRepositories$(): Observable<Repository[]> {
+        return this._store.pipe(select(fromSelectors.getFavoriteRepositories));
+    }
 }

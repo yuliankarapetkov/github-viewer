@@ -12,7 +12,6 @@ import { Repository } from '../../models';
   styleUrls: ['./trending.component.scss']
 })
 export class TrendingComponent implements OnInit {
-    item: Repository = null;
     repositories$: Observable<Repository[]>;
 
     constructor(

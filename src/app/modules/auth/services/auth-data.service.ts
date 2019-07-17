@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import * as firebase from 'firebase/app';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthDataService {
     constructor(
-        private _fireAuth: AngularFireAuth
+        private _fireAuth: AngularFireAuth,
+        private _firestore: AngularFirestore
     ) {}
 
-    getUser(): Observable<firebase.User | null> {
-        return this._fireAuth.authState;
+    getUser(): Observable<any> {
+        return this._fireAuth
+            .authState
+            .pipe(switchMap(user => user ? this._firestore.collection('users').doc(user.uid).valueChanges() : of(null)));
     }
 
     signInWithGoogle(): Observable<firebase.auth.UserCredential> {

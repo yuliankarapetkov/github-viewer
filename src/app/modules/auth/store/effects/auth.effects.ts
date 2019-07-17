@@ -5,8 +5,6 @@ import { switchMap, map, catchError, mapTo} from 'rxjs/operators';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import * as firebase from 'firebase/app';
-
 import * as fromRootActions from '../../../../store/actions';
 import * as fromActions from '../actions';
 import { AuthActionTypes } from '../actions';
@@ -28,11 +26,7 @@ export class AuthEffects {
                 return this._authDataService
                     .getUser()
                     .pipe(
-                        map((firebaseUser: firebase.User | null) => {
-                            const { uid, email } = firebaseUser;
-                            const user: User = firebaseUser ? { uid, email } : null;
-                            return new fromActions.GetUserSuccess(user);
-                        }),
+                        map((user: User | null) => new fromActions.GetUserSuccess(user)),
                         catchError(() => of(new fromActions.GetUserFailure()))
                     );
             })

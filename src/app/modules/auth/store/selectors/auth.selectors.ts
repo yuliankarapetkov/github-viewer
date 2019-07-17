@@ -9,4 +9,5 @@ export const getIsAuthenticated = createSelector(getAuthState, state => state.is
 export const getSignInLoading = createSelector(getAuthState, state => state.signInLoading);
 export const getSignOutLoading = createSelector(getAuthState, state => state.signOutLoading);
 
-export const getUserId = createSelector(getUser, user => user && user.uid);
+export const getUserId = createSelector(getUser, user => user && user.id);
+export const getUserFavorites = createSelector(getUser, user => user && user.favorites);
