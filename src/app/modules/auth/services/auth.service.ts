@@ -35,4 +35,8 @@ export class AuthService {
     getUserId$(): Observable<string> {
         return this._store.pipe(select(fromSelectors.getUserId));
     }
+
+    getUserFavoritesCount$(): Observable<number> {
+        return this._store.pipe(select(fromSelectors.getUserFavoritesCount));
+    }
 }

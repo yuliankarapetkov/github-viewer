@@ -11,3 +11,4 @@ export const getSignOutLoading = createSelector(getAuthState, state => state.sig
 
 export const getUserId = createSelector(getUser, user => user && user.id);
 export const getUserFavorites = createSelector(getUser, user => user && user.favorites);
+export const getUserFavoritesCount = createSelector(getUserFavorites, favorites => favorites && favorites.length);

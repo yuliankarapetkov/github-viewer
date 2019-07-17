@@ -13,7 +13,7 @@
             <mat-list-item (click)="sidenav.close()">
                 <a mat-button routerLink="/repositories/favorites">
                     <mat-icon mat-list-icon>favorite</mat-icon>
-                    Favorites (3)
+                    Favorites ({{ favoritesCount$ | async }})
                 </a>
             </mat-list-item>
             <mat-list-item (click)="sidenav.close()">
