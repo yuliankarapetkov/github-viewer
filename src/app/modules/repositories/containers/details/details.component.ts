@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { ToolbarService } from './../../../../services/toolbar.service';
@@ -14,6 +14,8 @@ import { RepositoriesService } from './../../services';
 })
 export class DetailsComponent implements OnInit, OnDestroy {
     repository: Repository;
+    favoriteRepositoryLoading$: Observable<boolean>;
+    unfavoriteRepositoryLoading$: Observable<boolean>;
 
     private _unsubscribeAll$ = new Subject<void>();
 
@@ -32,6 +34,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
             .getSelectedRepository$()
             .pipe(takeUntil(this._unsubscribeAll$))
             .subscribe((repository: Repository) => this.repository = repository);
+
+        this.favoriteRepositoryLoading$ = this._repositoriesService.getFavoriteRepositoryLoading$();
+        this.unfavoriteRepositoryLoading$ = this._repositoriesService.getUnfavoriteRepositoryLoading$();
     }
 
     ngOnDestroy(): void {

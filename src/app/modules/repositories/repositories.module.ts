@@ -7,7 +7,8 @@ import {
     MatButtonModule,
     MatChipsModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
 } from '@angular/material';
 
 import { StoreModule } from '@ngrx/store';
@@ -36,6 +37,7 @@ import { reducer, effects } from './store';
         MatChipsModule,
         MatDividerModule,
         MatListModule,
+        MatProgressSpinnerModule,
 
         StoreModule.forFeature('repositories', reducer),
         EffectsModule.forFeature(effects)

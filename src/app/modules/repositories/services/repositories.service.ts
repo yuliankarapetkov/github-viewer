@@ -44,4 +44,16 @@ export class RepositoriesService {
     getRepositoriesLoaded$(): Observable<boolean> {
         return this._store.pipe(select(fromSelectors.getRepositoriesLoaded));
     }
+
+    getRepositoriesLoading$(): Observable<boolean> {
+        return this._store.pipe(select(fromSelectors.getRepositoriesLoading));
+    }
+
+    getFavoriteRepositoryLoading$(): Observable<boolean> {
+        return this._store.pipe(select(fromSelectors.getFavoriteRepositoryLoading));
+    }
+
+    getUnfavoriteRepositoryLoading$(): Observable<boolean> {
+        return this._store.pipe(select(fromSelectors.getUnfavoriteRepositoryLoading));
+    }
 }

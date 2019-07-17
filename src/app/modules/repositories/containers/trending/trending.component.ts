@@ -12,6 +12,7 @@ import { Repository } from '../../models';
 })
 export class TrendingComponent implements OnInit {
     repositories$: Observable<Repository[]>;
+    loading$: Observable<boolean>;
 
     constructor(
         private _repositoriesService: RepositoriesService
@@ -19,5 +20,6 @@ export class TrendingComponent implements OnInit {
 
     ngOnInit(): void {
         this.repositories$ = this._repositoriesService.getRepositories$();
+        this.loading$ = this._repositoriesService.getRepositoriesLoading$();
     }
 }

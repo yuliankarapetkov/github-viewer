@@ -30,6 +30,7 @@
         <button
             *ngIf="hasUnfavoriteButton"
             (click)="unfavorite()"
+            [disabled]="unfavoriteLoading"
             mat-button>
             Remove
         </button>

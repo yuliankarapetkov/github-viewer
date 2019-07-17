@@ -1,8 +1,19 @@
 <div class="content">
     <h2>Trending</h2>
 
-    <app-repository-item
-        *ngFor="let repository of repositories$ | async"
-        [item]="repository">
-    </app-repository-item>
+    <mat-spinner *ngIf="loading$ | async; else loaded"></mat-spinner>
+
+    <ng-template #loaded>
+        <h3 *ngIf="!(repositories$ | async).length; else hasRepositories">
+            No repositories and no smarter message obviously.
+        </h3>
+
+        <ng-template #hasRepositories>
+            <app-repository-item
+                *ngFor="let repository of repositories$ | async"
+                [item]="repository">
+            </app-repository-item>
+        </ng-template>
+
+    </ng-template>
 </div>

@@ -17,7 +17,7 @@
                 </a>
             </mat-list-item>
             <mat-list-item (click)="sidenav.close()">
-                <button mat-button (click)="signOut()">
+                <button mat-button [disabled]="signOutLoading$ | async" (click)="signOut()">
                     <mat-icon mat-list-icon>exit_to_app</mat-icon>
                     Sign out
                 </button>

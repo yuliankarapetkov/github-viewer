@@ -1,10 +1,22 @@
 <div class="content">
     <h2>Favorites</h2>
 
-    <app-repository-item
-        *ngFor="let repository of repositories$ | async"
-        [item]="repository"
-        hasUnfavoriteButton="true"
-        (unfavorited)="unfavoriteRepository($event)">
-    </app-repository-item>
+    <mat-spinner *ngIf="getRepositoriesLoading$ | async; else loaded"></mat-spinner>
+
+    <ng-template #loaded>
+        <h3 *ngIf="!(repositories$ | async).length; else hasRepositories">
+            You don't have any favorite repositories. Be more positive ;)
+        </h3>
+
+        <ng-template #hasRepositories>
+            <app-repository-item
+                *ngFor="let repository of repositories$ | async"
+                hasUnfavoriteButton="true"
+                [unfavoriteLoading]="unfavoriteRepositoryLoading$ | async"
+                [item]="repository"
+                (unfavorited)="unfavoriteRepository($event)">
+            </app-repository-item>
+        </ng-template>
+
+    </ng-template>
 </div>

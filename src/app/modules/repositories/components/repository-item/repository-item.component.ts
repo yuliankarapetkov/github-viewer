@@ -10,6 +10,7 @@ import { Repository } from './../../models/repository';
 export class RepositoryItemComponent implements OnInit {
     @Input() item: Repository;
     @Input() hasUnfavoriteButton = false;
+    @Input() unfavoriteLoading = false;
 
     @Output() unfavorited = new EventEmitter<Repository>();
 

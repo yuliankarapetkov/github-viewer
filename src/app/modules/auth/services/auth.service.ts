@@ -39,4 +39,12 @@ export class AuthService {
     getUserFavoritesCount$(): Observable<number> {
         return this._store.pipe(select(fromSelectors.getUserFavoritesCount));
     }
+
+    getSignInLoading$(): Observable<boolean> {
+        return this._store.pipe(select(fromSelectors.getSignInLoading));
+    }
+
+    getSignOutLoading$(): Observable<boolean> {
+        return this._store.pipe(select(fromSelectors.getSignOutLoading));
+    }
 }

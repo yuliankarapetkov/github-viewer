@@ -11,6 +11,8 @@ export const getRepositoriesState = createFeatureSelector<RepositoriesState>('re
 
 export const getList = createSelector(getRepositoriesState, state => state.list);
 export const getRepositoriesLoading = createSelector(getRepositoriesState, state => state.getRepositoriesLoading);
+export const getFavoriteRepositoryLoading = createSelector(getRepositoriesState, state => state.favoriteRepositoryLoading);
+export const getUnfavoriteRepositoryLoading = createSelector(getRepositoriesState, state => state.unfavoriteRepositoryLoading);
 export const getRepositoriesLoaded = createSelector(getRepositoriesState, state => state.loaded);
 
 export const getRepositories = createSelector(

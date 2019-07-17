@@ -14,6 +14,7 @@ import { ToolbarConfig } from './models';
 export class AppComponent implements OnInit {
     toolbarConfig$: Observable<ToolbarConfig>;
     favoritesCount$: Observable<number>;
+    signOutLoading$: Observable<boolean>;
 
     constructor(
         private _toolbarService: ToolbarService,
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         this._authService.requestUser();
         this.favoritesCount$ = this._authService.getUserFavoritesCount$();
+        this.signOutLoading$ = this._authService.getSignOutLoading$();
     }
 
     goBack(): void {
