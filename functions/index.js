@@ -1,8 +1,16 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const serviceAccount = require('./service-account-key');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://githubviewer-mvp.firebaseio.com' // TODO: remove magic strings
+});
+
+const firestore = admin.firestore();
+
+exports.onCreateUser = functions.auth.user()
+    .onCreate(user => {
+        const { uid: id, email } = user;
+        return firestore.collection('users').doc(id).set({ id, email, favorites: [] });
+    });

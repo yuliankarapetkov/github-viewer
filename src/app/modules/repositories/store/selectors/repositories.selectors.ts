@@ -16,7 +16,7 @@ export const getRepositories = createSelector(
     getList,
     fromAuth.getUserFavorites,
     (repositories: Repository[], favorites: string[]) => {
-        return repositories && repositories.map(repo => ({ ...repo, isFavorite: favorites.some(f => f === repo.id) }));
+        return repositories && repositories.map(repo => ({ ...repo, isFavorite: favorites && favorites.some(f => f === repo.id) }));
     });
 
 export const getFavoriteRepositories = createSelector(
