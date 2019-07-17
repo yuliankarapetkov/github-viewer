@@ -4,7 +4,7 @@
     <app-repository-item
         *ngFor="let repository of repositories$ | async"
         [item]="repository"
-        hasRemoveButton="true"
-        (removed)="unfavoriteRepository($event)">
+        hasUnfavoriteButton="true"
+        (unfavorited)="unfavoriteRepository($event)">
     </app-repository-item>
 </div>

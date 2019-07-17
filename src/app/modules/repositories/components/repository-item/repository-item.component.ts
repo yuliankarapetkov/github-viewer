@@ -9,16 +9,16 @@ import { Repository } from './../../models/repository';
 })
 export class RepositoryItemComponent implements OnInit {
     @Input() item: Repository;
-    @Input() hasRemoveButton = false;
+    @Input() hasUnfavoriteButton = false;
 
-    @Output() removed = new EventEmitter<Repository>();
+    @Output() unfavorited = new EventEmitter<Repository>();
 
     constructor() { }
 
     ngOnInit(): void {
     }
 
-    remove(): void {
-        this.removed.emit(this.item);
+    unfavorite(): void {
+        this.unfavorited.emit(this.item);
     }
 }
