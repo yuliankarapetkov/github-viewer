@@ -1,3 +1,4 @@
+import { ScrollService } from './services/scroll.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel } from '@angular/router';
 
@@ -23,9 +24,14 @@ export class AppComponent implements OnInit, AfterViewInit {
         private _toolbarService: ToolbarService,
         private _authService: AuthService,
         private _routerService: RouterService,
-        private _router: Router
+        private _router: Router,
+        private _scrollService: ScrollService
     ) {
         this.toolbarConfig$ = this._toolbarService.getConfig$();
+        this._scrollService.useRoutes([
+            '/repositories/trending',
+            '/repositories/favorites'
+        ]);
     }
 
     ngOnInit(): void {
