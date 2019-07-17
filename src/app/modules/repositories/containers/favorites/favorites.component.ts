@@ -8,13 +8,7 @@ import { Repository } from '../../models';
     styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
-    item: Repository = {
-        id: '123',
-        title: 'mozzila/sth',
-        description: 'mozzila descr',
-        starsCount: 123,
-        language: 'JavaScript'
-    };
+    item: Repository = null;
 
     constructor() { }
 

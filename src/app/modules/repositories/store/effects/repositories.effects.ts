@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of } from 'rxjs';
-import { switchMap, map, catchError} from 'rxjs/operators';
+import { switchMap, map, catchError, take} from 'rxjs/operators';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
@@ -9,6 +9,7 @@ import { RepositoriesDataService } from './../../services';
 
 import * as fromActions from '../actions';
 import { RepositoriesActionTypes } from '../actions';
+import { Repository } from '../../models';
 
 @Injectable()
 export class RepositoriesEffects {
@@ -25,7 +26,8 @@ export class RepositoriesEffects {
                 return this._repositoriesDataService
                     .getRepositories()
                     .pipe(
-                        map(() => new fromActions.GetRepositoriesSuccess()),
+                        take(1),
+                        map((repositories: Repository[]) => new fromActions.GetRepositoriesSuccess(repositories)),
                         catchError(error => of(new fromActions.GetRepositoriesFailure()))
                     );
             })

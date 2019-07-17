@@ -1,5 +1,7 @@
 import { Action } from '@ngrx/store';
 
+import { Repository } from '../../models';
+
 export enum RepositoriesActionTypes {
     GetRepositories = '[Repositories] Get Repositories',
     GetRepositoriesSuccess = '[Repositories] Get Repositories Success',
@@ -12,6 +14,7 @@ export class GetRepositories implements Action {
 
 export class GetRepositoriesSuccess implements Action {
     readonly type = RepositoriesActionTypes.GetRepositoriesSuccess;
+    constructor(public payload: Repository[]) {}
 }
 
 export class GetRepositoriesFailure implements Action {

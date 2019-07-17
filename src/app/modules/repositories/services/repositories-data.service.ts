@@ -21,8 +21,10 @@ export class RepositoriesDataService {
             .subscribe(uid => this._uid = uid);
     }
 
-    getRepositories(): Observable<Repository[]> {
-        return of([]);
+    getRepositories(): Observable<any[]> {
+        return this._firestore
+            .collection('repositories', ref => ref.limit(3))
+            .valueChanges();
     }
 
     saveRepository(repository: Repository): Observable<void> {

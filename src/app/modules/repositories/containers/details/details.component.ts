@@ -10,13 +10,7 @@ import { RepositoriesDataService } from '../../services';
     styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit, OnDestroy {
-    repository: Repository = {
-        id: '123',
-        title: 'this is the title',
-        description: 'this is the description',
-        language: 'JavaScript',
-        starsCount: 250
-    };
+    repository: Repository = null;
 
     constructor(
         private _toolbarService: ToolbarService,

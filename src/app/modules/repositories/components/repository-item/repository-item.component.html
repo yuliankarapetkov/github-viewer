@@ -1,11 +1,11 @@
 <mat-card class="repository-card">
     <mat-card-header>
         <mat-card-title>
-            {{ item.title }}
+            {{ item.name }}
         </mat-card-title>
         <mat-card-subtitle>
             <mat-icon>favorite</mat-icon>
-            {{ item.starsCount }}
+            {{ item.stars }}
         </mat-card-subtitle>
     </mat-card-header>
 
@@ -15,7 +15,7 @@
         </p>
 
         <mat-chip-list>
-            <mat-chip color="accent" selected selectable="false">
+            <mat-chip [style.backgroundColor]="item.languageColor" selected selectable="false">
                 {{ item.language }}
             </mat-chip>
         </mat-chip-list>

@@ -20,7 +20,15 @@ export function reducer(state = initialState, action: fromActions.RepositoriesAc
             };
         }
 
-        case RepositoriesActionTypes.GetRepositoriesSuccess:
+        case RepositoriesActionTypes.GetRepositoriesSuccess: {
+            const list = action.payload;
+            return {
+                ...state,
+                list,
+                getRepositoriesLoading: false
+            };
+        }
+
         case RepositoriesActionTypes.GetRepositoriesFailure: {
             return {
                 ...state,

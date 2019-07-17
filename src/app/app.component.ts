@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { RouterService, ToolbarService } from './services';
-import { ToolbarConfig } from './models';
 import { AuthService } from './modules/auth/services';
+import { ToolbarConfig } from './models';
 
 @Component({
     selector: 'app-root',

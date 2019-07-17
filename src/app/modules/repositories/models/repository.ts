@@ -1,7 +1,9 @@
 export interface Repository {
     id: string;
-    title: string;
+    name: string;
     description: string;
-    starsCount: number;
+    stars: number;
     language: string;
+    languageColor: string;
+    builtBy: { username: string, followers: number; avatar: string; }[];
 }

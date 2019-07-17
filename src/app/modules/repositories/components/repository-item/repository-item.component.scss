@@ -1,15 +1,19 @@
-mat-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+mat-card {
+    margin-bottom: 32px;
 
-    mat-card-subtitle {
+    mat-card-header {
         display: flex;
         align-items: center;
-        font-size: 0.9rem;
+        justify-content: space-between;
 
-        mat-icon {
-            margin-right: 6px;
+        mat-card-subtitle {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+
+            mat-icon {
+                margin-right: 6px;
+            }
         }
     }
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
+import { Observable } from 'rxjs';
+
+import { RouterService } from './../../../../services';
+import { RepositoriesService } from './../../services';
 import { Repository } from '../../models';
 
 @Component({
@@ -9,22 +12,20 @@ import { Repository } from '../../models';
   styleUrls: ['./trending.component.scss']
 })
 export class TrendingComponent implements OnInit {
-    item: Repository = {
-        id: '123',
-        title: 'mozzila/sth',
-        description: 'mozzila descr',
-        starsCount: 123,
-        language: 'JavaScript'
-    }
+    item: Repository = null;
+    repositories$: Observable<Repository[]>;
 
     constructor(
-        private _router: Router
+        private _repositoriesService: RepositoriesService,
+        private _routerService: RouterService
     ) { }
 
     ngOnInit(): void {
+        this._repositoriesService.requestRepositories();
+        this.repositories$ = this._repositoriesService.getRepositories$();
     }
 
     seeDetails(repository: Repository): void {
-        this._router.navigate(['/', 'repositories', repository.id]);
+        this._routerService.go({ path: ['/', 'repositories', repository.id] });
     }
 }
