@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of } from 'rxjs';
-import { switchMap, map, catchError, mapTo} from 'rxjs/operators';
+import { switchMap, map, catchError, mapTo, filter} from 'rxjs/operators';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
@@ -30,13 +30,6 @@ export class AuthEffects {
                         catchError(() => of(new fromActions.GetUserFailure()))
                     );
             })
-        );
-
-    @Effect()
-    getUserFailure$ = this._actions$
-        .pipe(
-            ofType(AuthActionTypes.GetUserFailure),
-            mapTo(new fromRootActions.Go({ path: ['/', 'login'] }))
         );
 
     @Effect()
@@ -83,6 +76,11 @@ export class AuthEffects {
     signOutSuccess$ =  this._actions$
         .pipe(
             ofType(AuthActionTypes.SignOutSuccess),
-            mapTo(new fromActions.GetUser())
+            switchMap(() => {
+                return [
+                    new fromActions.GetUser(),
+                    new fromRootActions.Go({ path: ['/', 'login'] })
+                ];
+            })
         );
 }

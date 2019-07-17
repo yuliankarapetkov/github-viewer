@@ -35,7 +35,14 @@ export function reducer(state = initialState, action: fromActions.AuthAction): A
             };
         }
 
-        case AuthActionTypes.SignInWithGoogleSuccess:
+        case AuthActionTypes.SignInWithGoogleSuccess: {
+            return {
+                ...state,
+                isAuthenticated: true,
+                signInLoading: false
+            };
+        }
+
         case AuthActionTypes.SignInWithGoogleFailure: {
             return {
                 ...state,
@@ -50,7 +57,14 @@ export function reducer(state = initialState, action: fromActions.AuthAction): A
             };
         }
 
-        case AuthActionTypes.SignOutSuccess:
+        case AuthActionTypes.SignOutSuccess: {
+            return {
+                ...state,
+                isAuthenticated: false,
+                signOutLoading: false
+            };
+        }
+
         case AuthActionTypes.SignOutFailure: {
             return {
                 ...state,
