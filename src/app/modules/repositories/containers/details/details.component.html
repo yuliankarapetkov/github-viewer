@@ -1,23 +1,29 @@
 <div class="content">
     <mat-card class="details">
-        <h2>mozzila/send</h2>
+        <h2>{{ repository.title }}</h2>
         <p>
-            fasj jfas jfasj jkas as jkfaskj jkfas fajsj kas
+            {{ repository.description }}
         </p>
 
         <div>
             <div class="details__favorites">
                 <mat-icon>favorite</mat-icon>
-                1234
+                {{ repository.starsCount }}
             </div>
 
             <mat-chip-list class="details__language">
                 <mat-chip color="accent" selected selectable="false">
-                    Ruby
+                    {{ repository.language }}
                 </mat-chip>
             </mat-chip-list>
 
-            <button class="details__save-button" mat-raised-button color="primary">Save to Favorites</button>
+            <button
+                (click)="saveRepository()"
+                class="details__save-button"
+                mat-raised-button
+                color="primary">
+                Save to Favorites
+            </button>
         </div>
 
         <mat-divider>

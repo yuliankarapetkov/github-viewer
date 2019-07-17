@@ -31,4 +31,8 @@ export class AuthService {
     getIsAuthenticated$(): Observable<boolean> {
         return this._store.pipe(select(fromSelectors.getIsAuthenticated));
     }
+
+    getUserId$(): Observable<string> {
+        return this._store.pipe(select(fromSelectors.getUserId));
+    }
 }
