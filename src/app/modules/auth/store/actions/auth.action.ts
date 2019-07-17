@@ -35,6 +35,7 @@ export class SignInWithGoogle implements Action {
 
 export class SignInWithGoogleSuccess implements Action {
     readonly type = AuthActionTypes.SignInWithGoogleSuccess;
+    constructor(public payload: { id: string; email: string }) {}
 }
 
 export class SignInWithGoogleFailure implements Action {

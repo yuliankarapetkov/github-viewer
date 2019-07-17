@@ -6,7 +6,9 @@ import {
     MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MAT_SNACK_BAR_DEFAULT_OPTIONS,
+    MatSnackBarModule
 } from '@angular/material';
 
 import { StoreModule } from '@ngrx/store';
@@ -40,6 +42,7 @@ import { effects } from './store/effects';
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
+        MatSnackBarModule,
 
         // Ngrx
         StoreModule.forRoot(reducers, {
@@ -66,6 +69,14 @@ import { effects } from './store/effects';
         {
             provide: RouterStateSerializer,
             useClass: CustomSerializer
+        },
+        {
+            provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+            useValue: {
+                duration: 2500,
+                verticalPosition: 'top',
+                horizontalPosition: 'right'
+            }
         }
     ],
     bootstrap: [AppComponent]

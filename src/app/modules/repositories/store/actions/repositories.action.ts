@@ -36,6 +36,7 @@ export class FavoriteRepository implements Action {
 
 export class FavoriteRepositorySuccess implements Action {
     readonly type = RepositoriesActionTypes.FavoriteRepositorySuccess;
+    constructor(public payload: Repository) {}
 }
 
 export class FavoriteRepositoryFailure implements Action {
@@ -49,6 +50,7 @@ export class UnfavoriteRepository implements Action {
 
 export class UnfavoriteRepositorySuccess implements Action {
     readonly type = RepositoriesActionTypes.UnfavoriteRepositorySuccess;
+    constructor(public payload: Repository) {}
 }
 
 export class UnfavoriteRepositoryFailure implements Action {

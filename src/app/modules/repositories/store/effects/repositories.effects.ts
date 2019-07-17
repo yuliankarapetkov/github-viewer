@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 import { of } from 'rxjs';
-import { switchMap, map, catchError, take, mapTo} from 'rxjs/operators';
+import { switchMap, map, catchError, take, mapTo, tap} from 'rxjs/operators';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
@@ -15,7 +16,8 @@ import { Repository } from '../../models';
 export class RepositoriesEffects {
     constructor(
         private _actions$: Actions,
-        private _repositoriesDataService: RepositoriesDataService
+        private _repositoriesDataService: RepositoriesDataService,
+        private _snackBar: MatSnackBar
     ) {}
 
     @Effect()
@@ -43,10 +45,18 @@ export class RepositoriesEffects {
                     .favoriteRepository(repository)
                     .pipe(
                         take(1),
-                        mapTo(new fromActions.FavoriteRepositorySuccess()),
+                        mapTo(new fromActions.FavoriteRepositorySuccess(repository)),
                         catchError(() => of(new fromActions.FavoriteRepositoryFailure()))
                     );
             })
+        );
+
+    @Effect({ dispatch: false })
+    favoriteRepositorySuccess$ = this._actions$
+        .pipe(
+            ofType(RepositoriesActionTypes.FavoriteRepositorySuccess),
+            map((action: fromActions.FavoriteRepositorySuccess) => action.payload),
+            tap((repository: Repository) => this._snackBar.open(`You have added ${repository.name} to favorites.`, 'Yay'))
         );
 
     @Effect()
@@ -59,9 +69,17 @@ export class RepositoriesEffects {
                     .unfavoriteRepository(repository)
                     .pipe(
                         take(1),
-                        mapTo(new fromActions.UnfavoriteRepositorySuccess()),
+                        mapTo(new fromActions.UnfavoriteRepositorySuccess(repository)),
                         catchError(() => of(new fromActions.UnfavoriteRepositoryFailure()))
                     );
             })
+        );
+
+    @Effect({ dispatch: false })
+    unfavoriteRepositorySuccess$ = this._actions$
+        .pipe(
+            ofType(RepositoriesActionTypes.UnfavoriteRepositorySuccess),
+            map((action: fromActions.UnfavoriteRepositorySuccess) => action.payload),
+            tap((repository: Repository) => this._snackBar.open(`You have removed ${repository.name} from favorites.`, 'Thanks'))
         );
 }

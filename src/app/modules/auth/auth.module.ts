@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     MatCardModule,
-    MatButtonModule,
+    MatButtonModule
 } from '@angular/material';
 
 import { StoreModule } from '@ngrx/store';

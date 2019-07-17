@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 import { of } from 'rxjs';
-import { switchMap, map, catchError, mapTo, filter} from 'rxjs/operators';
+import { switchMap, map, catchError, mapTo, filter, tap} from 'rxjs/operators';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
+
+import * as firebase from 'firebase/app';
 
 import * as fromRootActions from '../../../../store/actions';
 import * as fromActions from '../actions';
@@ -15,7 +18,8 @@ import { User } from '../../models';
 export class AuthEffects {
     constructor(
         private _actions$: Actions,
-        private _authDataService: AuthDataService
+        private _authDataService: AuthDataService,
+        private _snackBar: MatSnackBar
     ) {}
 
     @Effect()
@@ -40,16 +44,18 @@ export class AuthEffects {
                 return this._authDataService
                     .signInWithGoogle()
                     .pipe(
-                        map(() => new fromActions.SignInWithGoogleSuccess()),
+                        map((user: { id: string; email: string; }) => new fromActions.SignInWithGoogleSuccess(user)),
                         catchError(() => of(new fromActions.SignInWithGoogleFailure()))
                     );
             })
         );
 
     @Effect()
-    signInSuccess$ =  this._actions$
+    signInWithGoogleSuccess$ =  this._actions$
         .pipe(
             ofType(AuthActionTypes.SignInWithGoogleSuccess),
+            map((action: fromActions.SignInWithGoogleSuccess) => action.payload),
+            tap(({ email }: { email: string; }) => this._snackBar.open(`Logged in as ${email}`, 'Close')),
             switchMap(() => {
                 return [
                     new fromActions.GetUser(),
@@ -76,6 +82,7 @@ export class AuthEffects {
     signOutSuccess$ =  this._actions$
         .pipe(
             ofType(AuthActionTypes.SignOutSuccess),
+            tap(() => this._snackBar.open(`You have logged out successfully.`, 'Close')),
             switchMap(() => {
                 return [
                     new fromActions.GetUser(),
