@@ -22,11 +22,11 @@
     </mat-card-content>
 
     <mat-card-actions>
-        <button
-            (click)="seeDetails()"
+        <a
+            [routerLink]="['/', 'repositories', item.id]"
             mat-button>
             See details
-        </button>
+        </a>
         <button
             *ngIf="hasRemoveButton"
             (click)="remove()"

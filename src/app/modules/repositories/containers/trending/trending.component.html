@@ -3,7 +3,6 @@
 
     <app-repository-item
         *ngFor="let repository of repositories$ | async"
-        [item]="repository"
-        (detailsClicked)="seeDetails($event)">
+        [item]="repository">
     </app-repository-item>
 </div>
