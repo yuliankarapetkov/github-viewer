@@ -24,6 +24,5 @@ export const getSelectedRepository = createSelector(
     getRepositories,
     fromRoot.getParams,
     (repositories: Repository[], params: Params) => {
-        console.log(repositories, params)
         return repositories && repositories.find(repo => repo.id === params.repositoryId);
     });
